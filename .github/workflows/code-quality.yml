@@ -1,0 +1,27 @@
+---
+name: Code Quality
+
+on:
+  workflow_call:
+
+jobs:
+  check-code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: install dependencies
+        run: pip install -r requirements.txt
+
+      - name: run linter
+        run: flake8 app.py
+
+      - name: run security scan
+        run: bandit -r app.py
