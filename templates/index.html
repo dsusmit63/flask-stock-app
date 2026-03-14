@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Stock Dashboard</title>
+
+<link rel="stylesheet" href="/static/css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Stock Market Dashboard</h1>
+
+<div class="search-box">
+
+<input id="symbol" placeholder="Search Stock (AAPL, TSLA, MSFT)">
+<button onclick="loadStock()">Search</button>
+
+</div>
+
+<div class="gainers-panel">
+    <h3>🔥 Top Gainers</h3>
+    <div id="topGainers"></div>
+</div>
+
+<div id="stockCard" class="card hidden">
+
+<h2 id="company"></h2>
+
+<div class="stats">
+
+<div>
+<span>Price</span>
+<h3 id="price"></h3>
+</div>
+
+<div>
+<span>Open</span>
+<h3 id="open"></h3>
+</div>
+
+<div>
+<span>High</span>
+<h3 id="high"></h3>
+</div>
+
+<div>
+<span>Low</span>
+<h3 id="low"></h3>
+</div>
+
+<div>
+<span>Volume</span>
+<h3 id="volume"></h3>
+</div>
+
+</div>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+</div>
+
+<script src="/static/js/chart.js"></script>
+
+</body>
+</html>
