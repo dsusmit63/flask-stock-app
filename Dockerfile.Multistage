@@ -1,0 +1,22 @@
+FROM python:3.12-slim AS builder
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt --target  /app/deps
+
+COPY . .
+
+FROM gcr.io/distroless/python3-debian12
+
+WORKDIR /app
+
+COPY --from=builder /app/deps /app/deps
+COPY --from=builder /app .
+
+EXPOSE 5001
+
+ENV PYTHONPATH="/app/deps"
+
+CMD ["-m", "gunicorn", "-w", "4", "-b", "0.0.0.0:5001", "app:app"]
