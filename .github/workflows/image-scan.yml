@@ -1,0 +1,21 @@
+---
+name: Image Scan
+
+on:
+  workflow_call:
+
+jobs:
+  scan-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: login to dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: scan image using trivy
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: 'docker.io/${{ vars.DOCKERHUB_USERNAME }}/flask-stock-app:${{ github.sha }}'
+          severity: 'CRITICAL'
